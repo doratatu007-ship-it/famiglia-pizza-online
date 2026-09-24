@@ -1,24 +1,59 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Baby, Check, ChevronRight, Clock3, ExternalLink, Home, MapPin, Phone, Share2, Star, Users, UtensilsCrossed } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/pizza-hero.jpg";
+import paraenseImage from "@/assets/pizza-paraense.jpg";
+import ambienteImage from "@/assets/ambiente.jpg";
+import spreadImage from "@/assets/pizzas-spread.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const description="Famiglia da Pizza: pizzas artesanais, sabores especiais e ambiente familiar em Umarizal, Belém – PA. Confira nosso cardápio e venha nos visitar.";
 export const Route = createFileRoute("/")({
-  component: Index,
+  head:()=>({meta:[{title:"Famiglia da Pizza | Pizzaria em Belém – PA"},{name:"description",content:description},{property:"og:title",content:"Famiglia da Pizza | Pizzaria em Belém – PA"},{property:"og:description",content:description},{property:"og:type",content:"website"},{property:"og:url",content:"/"},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:"/"}],scripts:[{type:"application/ld+json",children:JSON.stringify({"@context":"https://schema.org","@type":"Restaurant",name:"Famiglia da Pizza",description:"Desde 2016, a Famiglia da Pizza é especialista em entregar felicidade. Pizzas com massas leves e frescas preparadas em processo artesanal.",telephone:"+55 91 3236-2014",address:{"@type":"PostalAddress",streetAddress:"Av. Alcindo Cacela, 408",addressLocality:"Belém",addressRegion:"PA",postalCode:"66065-217",addressCountry:"BR"},priceRange:"R$ 40–120 por pessoa",aggregateRating:{"@type":"AggregateRating",ratingValue:"4.8",reviewCount:"2393"}})}]}),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+const highlights=["Massas leves e frescas","Ambiente familiar","Área infantil","Sabores especiais","Atendimento presencial"];
+const successes=[
+  ["Pizza Calabresa","Mussarela, molho artesanal, calabresa, cebola e orégano","Tradicional"],
+  ["Pizza Mafiosa","Calabresa, bacon, ovo, parmesão e azeitona preta","Tradicional"],
+  ["Cheese Pepper","Pepperoni, cream cheese e alho frito","Favorita"],
+  ["Pizza Paraense","Camarão, jambu e redução de tucupi","Gourmet"],
+  ["Pizza de Camarão","Camarão-rosa, cream cheese e alho frito","Gourmet"],
+  ["Chocolate com Morango","Chocolate ao leite e morango","Doce"],
+];
+const spaces=[{icon:Users,title:"Ambiente familiar"},{icon:Baby,title:"Área infantil"},{icon:Baby,title:"Cadeiras para crianças"},{icon:UtensilsCrossed,title:"Salão confortável"},{icon:Home,title:"Sala de jantar privativa"}];
+const mapUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Av. Alcindo Cacela, 408 – Umarizal, Belém – PA, 66065-217");
+const whatsUrl="https://wa.me/559132362014";
+
+function HomePage(){
+  const share=async()=>{if(navigator.share){await navigator.share({title:"Famiglia da Pizza",text:description,url:window.location.href})}else{await navigator.clipboard.writeText(window.location.href);window.alert("Link copiado!")}};
+  return <>
+    <section className="relative flex min-h-[min(860px,100svh)] items-end overflow-hidden pt-20 sm:items-center">
+      <img src={heroImage} alt="Pizza artesanal de calabresa saindo do forno" width={1920} height={1200} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[64%_center]"/>
+      <div className="hero-shade absolute inset-0"/>
+      <div className="site-container relative z-10 pb-12 pt-28 text-cream sm:py-24"><div className="max-w-2xl reveal">
+        <div className="eyebrow mb-5 flex items-center gap-2 text-gold"><MapPin className="size-4"/> Umarizal — Belém/PA</div>
+        <h1 className="display-title text-balance">O sabor que reúne a família.</h1>
+        <p className="mt-6 max-w-xl text-base leading-7 text-cream/85 sm:text-lg">Desde 2016, levando pizzas artesanais, sabores especiais e momentos inesquecíveis para Belém.</p>
+        <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold"><span className="flex items-center gap-1 text-gold"><Star className="size-4 fill-current"/> 4,8/5</span><span>2.393 avaliações</span><span>R$ 40–120 por pessoa</span></div>
+        <div className="mt-8 flex flex-wrap gap-3"><Button asChild size="lg" variant="gold"><Link to="/cardapio">Ver Cardápio <ChevronRight/></Link></Button><Button asChild size="lg" className="border border-cream/30 bg-cream/10 text-cream backdrop-blur hover:bg-cream/20"><Link to="/reservas">Reservar uma mesa</Link></Button><Button asChild size="lg" variant="ghost" className="text-cream hover:bg-cream/10 hover:text-cream"><a href={mapUrl} target="_blank" rel="noreferrer"><MapPin/>Como chegar</a></Button></div>
+      </div></div>
+    </section>
+
+    <section className="section-pad paper-texture"><div className="site-container grid items-center gap-12 lg:grid-cols-[.9fr_1.1fr]"><div><p className="eyebrow text-primary">Feita para compartilhar</p><h2 className="section-title mt-4 text-balance">Uma experiência feita para compartilhar</h2><p className="mt-6 max-w-xl leading-7 text-muted-foreground">Na Famiglia da Pizza, cada pizza é preparada com massas leves e frescas, ingredientes selecionados e muito cuidado. Um espaço confortável para reunir a família e os amigos.</p></div><div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">{highlights.map((item,i)=><div key={item} className={`flex items-center gap-3 bg-card p-5 ${i===4?"sm:col-span-2":""}`}><span className="grid size-8 shrink-0 place-items-center rounded-full bg-secondary text-primary"><Check className="size-4"/></span><strong className="text-sm">{item}</strong></div>)}</div></div></section>
+
+    <section className="section-pad bg-ink text-cream"><div className="site-container"><div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><p className="eyebrow text-gold">Os preferidos</p><h2 className="section-title mt-4">Sabores que fazem sucesso</h2></div><Button asChild variant="gold"><Link to="/cardapio">Ver cardápio completo <ChevronRight/></Link></Button></div><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{successes.map(([name,ingredients,category],i)=><article key={name} className="group overflow-hidden rounded-lg bg-cream text-foreground"><div className="relative aspect-[16/9] overflow-hidden"><img src={i===3||i===4?paraenseImage:spreadImage} alt={name} width={1600} height={1104} loading="lazy" className={`image-zoom h-full w-full object-cover ${i!==3&&i!==4?`object-[${(i%3)*42}%_${i>2?75:25}%]`:""}`}/><span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase text-primary-foreground">{category}</span></div><div className="p-5"><h3 className="font-display text-2xl font-semibold">{name}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{ingredients}</p></div></article>)}</div></div></section>
+
+    <section className="grid lg:grid-cols-2"><div className="relative min-h-[440px] overflow-hidden"><img src={paraenseImage} alt="Pizza Paraense com camarão e jambu" width={1600} height={1104} loading="lazy" className="h-full w-full object-cover"/></div><div className="flex items-center bg-primary px-6 py-16 text-primary-foreground sm:px-14 lg:px-20"><div className="max-w-xl"><p className="eyebrow text-gold">Sabores de Belém</p><h2 className="section-title mt-4 text-balance">Um sabor de Belém em cada pedaço.</h2><h3 className="mt-8 font-display text-3xl font-semibold">Pizza Paraense</h3><p className="mt-2 leading-7 text-primary-foreground/85">Mussarela, molho de tomate artesanal, camarão, jambu e redução de tucupi.</p><p className="mt-6 border-l-2 border-gold pl-5 text-lg leading-8">Uma combinação que traz ingredientes e sabores da região para a experiência da Famiglia da Pizza.</p></div></div></section>
+
+    <section id="sobre" className="section-pad"><div className="site-container grid items-center gap-12 lg:grid-cols-2"><div className="group relative overflow-hidden rounded-lg"><img src={ambienteImage} alt="Imagem ilustrativa de um ambiente acolhedor de pizzaria" width={1600} height={1104} loading="lazy" className="image-zoom aspect-[4/3] w-full object-cover"/><span className="absolute bottom-3 left-3 rounded bg-ink/80 px-3 py-1 text-xs text-cream">Imagem ilustrativa</span></div><div><p className="eyebrow text-primary">Nossa história</p><h2 className="section-title mt-4 text-balance">Desde 2016, fazendo parte dos momentos especiais.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">Desde 2016, a Famiglia da Pizza é especialista em entregar felicidade. Pizzas com massas leves e frescas preparadas em processo artesanal, em um ambiente pensado para receber famílias e amigos.</p></div></div></section>
+
+    <section className="section-pad bg-secondary"><div className="site-container"><div className="text-center"><p className="eyebrow text-primary">Conforto para todos</p><h2 className="section-title mt-4">Um lugar para toda a família</h2></div><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{spaces.map(({icon:Icon,title})=><div key={title} className="rounded-lg border border-border bg-card p-6 text-center shadow-warm"><Icon className="mx-auto size-7 text-primary"/><h3 className="mt-4 font-bold">{title}</h3></div>)}</div></div></section>
+
+    <section id="avaliacoes" className="section-pad bg-primary text-center text-primary-foreground"><div className="site-container"><p className="eyebrow text-gold">Avaliações</p><h2 className="section-title mt-4">Quem experimenta, recomenda.</h2><div className="mt-8 flex justify-center gap-1 text-gold" aria-label="5 estrelas">{Array.from({length:5}).map((_,i)=><Star key={i} className="size-7 fill-current"/>)}</div><div className="mt-4 font-display text-5xl font-semibold">4,8 de 5</div><p className="mt-2 text-primary-foreground/70">2.393 avaliações</p><div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">{[1,2].map(i=><div key={i} className="rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-7 text-left"><div className="text-gold">★★★★★</div><p className="mt-5 italic text-primary-foreground/70">[Comentário de cliente será inserido aqui]</p></div>)}</div></div></section>
+
+    <section id="galeria" className="section-pad"><div className="site-container"><p className="eyebrow text-primary">Galeria</p><h2 className="section-title mt-4">Pizza, família e bons momentos.</h2><div className="mt-10 grid auto-rows-[190px] gap-4 sm:grid-cols-2 lg:grid-cols-3">{[[spreadImage,"Pizzas","sm:row-span-2"],[ambienteImage,"Ambiente — imagem ilustrativa",""],[heroImage,"Cardápio","sm:row-span-2"],["","Fachada — imagem a adicionar",""],["","Área interna — imagem a adicionar",""],["","Momentos em família — imagem a adicionar",""]].map(([src,label,span])=><div key={label} className={`group relative overflow-hidden rounded-lg bg-secondary ${span}`}>{src?<img src={src} alt={label} width={1600} height={1104} loading="lazy" className="image-zoom h-full w-full object-cover"/>:<div className="grid h-full place-items-center px-6 text-center text-sm font-semibold text-muted-foreground">Imagem real será adicionada aqui</div>}<span className="absolute bottom-0 left-0 right-0 bg-ink/75 p-3 text-sm font-bold text-cream">{label}</span></div>)}</div></div></section>
+
+    <section id="contato" className="section-pad bg-cream-deep"><div className="site-container grid gap-8 lg:grid-cols-2"><div className="rounded-lg bg-card p-7 shadow-warm sm:p-10"><p className="eyebrow text-primary">Localização</p><h2 className="section-title mt-4">Venha nos visitar</h2><div className="mt-7 flex gap-3"><MapPin className="mt-1 size-5 shrink-0 text-primary"/><p className="leading-7">Av. Alcindo Cacela, 408 – Umarizal<br/>Belém – PA<br/>66065-217</p></div><a href={mapUrl} target="_blank" rel="noreferrer" className="mt-8 flex min-h-48 items-center justify-center rounded-lg border border-dashed border-primary/40 bg-secondary text-center font-bold text-primary"><span><MapPin className="mx-auto mb-3 size-8"/>Abrir localização no Google Maps</span></a><Button asChild className="mt-5" variant="dark"><a href={mapUrl} target="_blank" rel="noreferrer">Ver rota no Google Maps <ExternalLink/></a></Button></div><div className="rounded-lg bg-ink p-7 text-cream shadow-warm sm:p-10"><p className="eyebrow text-gold">Contato</p><h2 className="section-title mt-4">Fale com a Famiglia da Pizza</h2><a href="tel:+559132362014" className="mt-7 block font-display text-3xl text-cream">(91) 3236-2014</a><div className="mt-7 flex flex-wrap gap-3"><Button asChild variant="gold"><a href="tel:+559132362014"><Phone/>Ligar agora</a></Button><Button asChild className="border border-cream/25 bg-transparent text-cream hover:bg-cream/10"><a href={whatsUrl} target="_blank" rel="noreferrer">WhatsApp</a></Button><Button onClick={share} className="border border-cream/25 bg-transparent text-cream hover:bg-cream/10"><Share2/>Compartilhar</Button></div><div className="mt-10 border-t border-cream/15 pt-7"><p className="eyebrow text-gold">Horário informado</p><div className="mt-4 flex items-center justify-between gap-4"><span className="flex items-center gap-2 font-bold"><Clock3/>Hoje</span><span>Fechamento às 23:00</span></div></div></div></div></section>
+  </>;
 }
