@@ -46,20 +46,20 @@ export const menuCategories: MenuCategory[] = [
   ].map(([name,ingredients,featured])=>({name:name as string,ingredients:ingredients as string,featured:Boolean(featured)})) },
   { id: "calzones", name: "Calzones", icon: "🥟", items: [
     ["Carne Seca com Catupiry e Banana","Carne seca, Catupiry® e banana"],["Filé com Parmesão","Filé e parmesão"],["Pepperoni","Pepperoni"],["4 Queijos","4 queijos"],["À Moda da Casa","Mussarela, lombinho, calabresa, bacon, milho e Catupiry®"],["Calabresa","Calabresa"],["Frango com Catupiry","Frango e Catupiry®"],["Bacon com Catupiry","Bacon e Catupiry®"],["Presunto com Mussarela","Presunto e mussarela"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
   { id: "bordas", name: "Bordas Recheadas", icon: "🧀", items: [
     ["Catupiry","Catupiry®"],["Catupiry com Frango","Catupiry® e frango"],["Catupiry com Alho","Catupiry® e alho"],["Catupiry com Bacon","Catupiry® e bacon"],["Cheddar","Cheddar"],["Cheddar com Bacon","Cheddar e bacon"],["Borda da Casa","Queijo, presunto e calabresa"],["Hot-Dog","Hot-dog"],["Cream Cheese Philadelphia","Cream cheese Philadelphia"],["Cream Cheese Philadelphia com Alho","Cream cheese Philadelphia e alho"],["Chocolate Branco","Chocolate branco"],["Chocolate ao Leite","Chocolate ao leite"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
   { id: "massas", name: "Massas e Pratos", icon: "🍝", items: [
     ["Chicken Caesar Salad","Filé de peito de frango, alface americana, tomate-cereja, croutons caseiros, molho Caesar e parmesão"],["Lasanha Bolonhesa","Massa artesanal Famiglia, mussarela e molho bolonhesa da casa"],["Lasanha Verde","Massa artesanal Famiglia com toque de jambu, queijo do Marajó e molho bechamel"],["Espaguete à Bolonhesa","Espaguete e molho bolonhesa da casa"],["Filé à Parmegiana do Chefe","Filé, farinha panko, mussarela, molho de tomate artesanal e fettuccine Alfredo"],["Filé Paillard","Filé mignon e fettuccine ao molho branco"],["Filé Al Capone","Filé mignon, arroz à piamontese e batatas fritas"],["Camarão Bonaparte","Camarões empanados e arroz à piamontese"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
   { id: "entradas", name: "Entradas", icon: "🍟", items: [
     ["Patatine","Nhoque de batata frito, queijo mussarela, bacon crocante e molho da casa"],["Crostine","Massa de pizza fina e crocante, azeite, orégano, parmesão e molho da casa"],["Arancini Famiglia","Bolinhos de arroz cremoso, mussarela, bacon, calabresa e farinha panko"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
   { id: "sobremesas", name: "Sobremesas", icon: "🍨", items: [
     ["Doce de Pote","210 g"],["Milk-Shakes Famiglia","Oreo, chocolate, açaí ou morango"],["Sorvete Ice Bode","—"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
   { id: "bebidas", name: "Bebidas", icon: "🥤", items: [
     ["Refri Lata","Refrigerante em lata"],["Refrigerante KS","Refrigerante"],["Água sem Gás","Água"],["Água com Gás","Água gaseificada"],["H20","H2O"],["Limoneto","Bebida sabor limão"],["Suco Natural","Laranja ou limão — 400 ml"],["Suco de Fruta","300 ml"],["Cerveja Long Neck","Cerveja"],["Cerveja Long Neck Premium","Cerveja premium"]
-  ].map(([name,ingredients])=>({name,ingredients})) },
+  ].map(([name="",ingredients=""])=>({name,ingredients})) },
 ];
